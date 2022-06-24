@@ -1,15 +1,13 @@
 #!/usr/bin/env sh
 
-set -e
-
 npm run build
 
 cd dist
 
 git init
 git add -A
-git commit -m 'First deploy'
+git commit -m 'new deploy'
 
-git push -f git@github.com:hugoriveros18/ultimate-calculator.git main:gh-pages
+git push -f https://github.com/hugoriveros18/ultimate-calculator.git master:gh-pages
 
-cd -
+cd ..
