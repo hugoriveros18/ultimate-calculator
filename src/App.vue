@@ -7,7 +7,7 @@
   </div>
   <div class="calculation" :class="{'calculation-dark-mode': darkMode, 'calculation-light-mode': !darkMode}">
     <div class="main-operation-container">
-      <div class="pointer">{{ pointerValue }}</div>
+      <div class="pointer" :class="{'pointer-visible':pointer,'pointer-not-visible':!pointer}">{{ pointerValue }}</div>
       <div class="main-operation" :class="{'main-operation-letter-dark': darkMode, 'main-operation-letter-light': !darkMode}">{{ screenOperation }}</div>
     </div>
     <div class="result-operation-container">
@@ -71,7 +71,7 @@ const removeLast = "del";
 const iconLight = "light_mode";
 const iconDark = "dark_mode";
 let pointer = ref(true);
-let pointerValue = ref(" |")
+let pointerValue = ref("|")
 
 setInterval(() => {pointer.value=!pointer.value},500)
 
@@ -92,14 +92,6 @@ const Big = require('big.js')
 let internalOperation = ref([]);
 let screenOperation = ref("");
 let screenResult = ref("");
-
-watch(pointer, (val) => {
-  if (val) {
-    pointerValue.value = "|";
-  } else {
-    pointerValue.value = ""
-  }
-})
 
 watch(internalOperation.value, (val) => {
   let counter = 0;
@@ -540,15 +532,15 @@ body {
 .main-operation-letter-light {
   color: #2e323b;
 }
-.pointerNotVisible {
-  display:none;
-}
 .pointer {
-  width: 8px;
   display: flex;
   justify-content: flex-end;
+  width: 8px;
   font-size: 3.5rem;
   color: rgb(119, 119, 216);
+}
+.pointer-not-visible {
+  opacity: 0;
 }
 .result-operation-container {
   height: 40%;
