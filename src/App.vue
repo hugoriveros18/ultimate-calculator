@@ -7,6 +7,7 @@
   </div>
   <div class="calculation" :class="{'calculation-dark-mode': darkMode, 'calculation-light-mode': !darkMode}">
     <div class="main-operation-container">
+      <div class="pointer">{{ pointerValue }}</div>
       <div class="main-operation" :class="{'main-operation-letter-dark': darkMode, 'main-operation-letter-light': !darkMode}">{{ screenOperation }}</div>
     </div>
     <div class="result-operation-container">
@@ -69,6 +70,11 @@ const point = ".";
 const removeLast = "del";
 const iconLight = "light_mode";
 const iconDark = "dark_mode";
+let pointer = ref(true);
+let pointerValue = ref(" |")
+
+setInterval(() => {pointer.value=!pointer.value},500)
+
 const operatorsList = {
   plus: plus,
   minus: minus,
@@ -81,10 +87,19 @@ const operatorListMultDiv = {
 };
 let darkMode = ref(true);
 let lightMode = ref(false);
+const Big = require('big.js')
 
 let internalOperation = ref([]);
 let screenOperation = ref("");
 let screenResult = ref("");
+
+watch(pointer, (val) => {
+  if (val) {
+    pointerValue.value = "|";
+  } else {
+    pointerValue.value = ""
+  }
+})
 
 watch(internalOperation.value, (val) => {
   let counter = 0;
@@ -130,34 +145,34 @@ watch(internalOperation.value, (val) => {
       switch(operators[opCounter]){
         case plus:
           if (newNumber.includes(percentage) && !newNumber.includes(minus)) {
-            result += result * (parseFloat(newNumber.slice(0,-1)) / 100);
+            result = Big(result).plus(result * (parseFloat(newNumber.slice(0,-1)) / 100)).toNumber();
           } else {
-            result += parseFloat(newNumber);
+            result = Big(result).plus(parseFloat(newNumber)).toNumber();
           }
           break;
         case minus:
           if (newNumber.includes(percentage) && !newNumber.includes(minus)) {
-            result -= result * (parseFloat(newNumber.slice(0,-1)) / 100);
+            result = Big(result).minus(result * (parseFloat(newNumber.slice(0,-1)) / 100)).toNumber();
           } else {
-            result -= parseFloat(newNumber);
+            result = Big(result).minus(parseFloat(newNumber)).toNumber();
           }
           break;
         case multiplication:
           if (newNumber.includes(percentage) && !newNumber.includes(minus)) {
-            result *= parseFloat(newNumber.slice(0,-1)) / 100;
+            result = Big(result).times(parseFloat(newNumber.slice(0,-1)) / 100).toNumber();
           } else if (newNumber.includes(percentage) && newNumber.includes(minus)) {
-            result *= (parseFloat(newNumber.slice(1)) / 100)*(-1);
+            result = Big(result).times((parseFloat(newNumber.slice(1)) / 100)*(-1)).toNumber();
           } else {
-            result *= parseFloat(newNumber);
+            result = Big(result).times(parseFloat(newNumber)).toNumber();
           }
           break;
         case division:
           if (newNumber.includes(percentage) && !newNumber.includes(minus)) {
-            result /= parseFloat(newNumber.slice(0,-1)) / 100;
+            result = Big(result).div(parseFloat(newNumber.slice(0,-1)) / 100).toNumber();
           } else if (newNumber.includes(percentage) && newNumber.includes(minus)) {
-            result /= (parseFloat(newNumber.slice(1)) / 100)*(-1);
+            result = Big(result).div((parseFloat(newNumber.slice(1)) / 100)*(-1)).toNumber();
           } else {
-            result /= parseFloat(newNumber);
+            result = Big(result).div(parseFloat(newNumber)).toNumber();
           }
           break;
       }
@@ -173,30 +188,30 @@ watch(internalOperation.value, (val) => {
         switch(operators[opCounter]){
           case plus:
             if (finalNumbers[numCounter].includes(percentage) && !newNumber.includes(minus)) {
-              result += result * (parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100);
+              result = Big(result).plus(result * (parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100)).toNumber();
             } else {
-              result += parseFloat(finalNumbers[numCounter]);
+              result = Big(result).plus(parseFloat(finalNumbers[numCounter])).toNumber();
             }
             break;
           case minus:
             if (finalNumbers[numCounter].includes(percentage) && !newNumber.includes(minus)) {
-              result -= result * (parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100);
+              result = Big(result).minus(result * (parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100)).toNumber();
             } else {
-              result -= parseFloat(finalNumbers[numCounter]);
+              result = Big(result).minus(parseFloat(finalNumbers[numCounter])).toNumber();
             }
             break;
           case multiplication:
             if (finalNumbers[numCounter].includes(percentage) && !newNumber.includes(minus)) {
-              result *= parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100;
+              result = Big(result).times(parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100).toNumber();
             } else {
-              result *= parseFloat(finalNumbers[numCounter]);
+              result = Big(result).times(parseFloat(finalNumbers[numCounter])).toNumber();
             }
             break;
           case division:
             if (finalNumbers[numCounter].includes(percentage) && !newNumber.includes(minus)) {
-              result /= parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100;
+              result = Big(result).div(parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100).toNumber();
             } else {
-              result /= parseFloat(finalNumbers[numCounter]);
+              result = Big(result).div(parseFloat(finalNumbers[numCounter]));
             }
             break;
         }
@@ -206,14 +221,14 @@ watch(internalOperation.value, (val) => {
         switch(operators[operators.length-1]) {
           case plus:
             if (newNumber.includes(percentage) && !newNumber.includes(minus)) {
-              result += result * (parseFloat(newNumber.slice(0,-1)) / 100)
+              result = Big(result).plus(result * (parseFloat(newNumber.slice(0,-1)) / 100)).toNumber();
               if (isNaN(result)) {
                 screenResult.value = "Error";          
               } else {
                 screenResult.value = result;
               }
             } else {
-              result += parseFloat(newNumber);
+              result = Big(result).plus(parseFloat(newNumber)).toNumber();
               if (isNaN(result)) {
                 screenResult.value = "Error";          
               } else {
@@ -223,14 +238,14 @@ watch(internalOperation.value, (val) => {
             break;
           case minus:
             if (newNumber.includes(percentage) && !newNumber.includes(minus)) {
-              result -= result * (parseFloat(newNumber.slice(0,-1)) / 100)
+              result = Big(result).minus(result * (parseFloat(newNumber.slice(0,-1)) / 100)).toNumber();
               if (isNaN(result)) {
                 screenResult.value = "Error";          
               } else {
                 screenResult.value = result;
               }
             } else {
-              result -= parseFloat(newNumber);
+              result = Big(result).minus(parseFloat(newNumber)).toNumber();
               if (isNaN(result)) {
                 screenResult.value = "Error";          
               } else {
@@ -240,14 +255,14 @@ watch(internalOperation.value, (val) => {
             break;
           case multiplication:
             if (newNumber.includes(percentage) && !newNumber.includes(minus)) {
-              result *= parseFloat(newNumber.slice(0,-1)) / 100
+              result = Big(result).times(parseFloat(newNumber.slice(0,-1)) / 100).toNumber();
               if (isNaN(result)) {
                 screenResult.value = "Error";          
               } else {
                 screenResult.value = result;
               }
             } else {
-              result *= parseFloat(newNumber);
+              result = Big(result).times(parseFloat(newNumber)).toNumber();
               if (isNaN(result)) {
                 screenResult.value = "Error";          
               } else {
@@ -257,14 +272,14 @@ watch(internalOperation.value, (val) => {
             break;
           case division:
             if (newNumber.includes(percentage) && !newNumber.includes(minus)) {
-              result /= parseFloat(newNumber.slice(0,-1)) / 100;
+              result = Big(result).div(parseFloat(newNumber.slice(0,-1)) / 100).toNumber();
               if (isNaN(result)) {
                 screenResult.value = "Error";          
               } else {
                 screenResult.value = result;
               }
             } else {
-              result /= parseFloat(newNumber);
+              result = Big(result).div(parseFloat(newNumber)).toNumber();
               if (isNaN(result)) {
                 screenResult.value = "Error";          
               } else {
@@ -291,30 +306,30 @@ if (operators.length > 1 && Object.values(operatorsList).includes(val[val.length
     switch(operators[opCounter]){
       case plus:
         if (newNumber.includes(percentage)) {
-          result += result * (parseFloat(newNumber.slice(0,-1)) / 100);
+          result = Big(result).plus(result * (parseFloat(newNumber.slice(0,-1)) / 100)).toNumber();
         } else {
-          result += parseFloat(newNumber);
+          result = Big(result).plus(parseFloat(newNumber)).toNumber();
         }
         break;
       case minus:
         if (newNumber.includes(percentage)) {
-          result -= result * (parseFloat(newNumber.slice(0,-1)) / 100);
+          result = Big(result).minus(result * (parseFloat(newNumber.slice(0,-1)) / 100)).toNumber();
         } else {
-          result -= parseFloat(newNumber);
+          result = Big(result).minus(parseFloat(newNumber)).toNumber();
         }
         break;
       case multiplication:
         if (newNumber.includes(percentage)) {
-          result *= parseFloat(newNumber.slice(0,-1)) / 100;
+          result = Big(result).times(parseFloat(newNumber.slice(0,-1)) / 100).toNumber();
         } else {
-          result *= parseFloat(newNumber);
+          result = Big(result).times(parseFloat(newNumber)).toNumber();
         }
         break;
       case division:
         if (newNumber.includes(percentage)) {
-          result /= parseFloat(newNumber.slice(0,-1)) / 100;
+          result = Big(result).div(parseFloat(newNumber.slice(0,-1)) / 100).toNumber();
         } else {
-          result /= parseFloat(newNumber);
+          result = Big(result).div(parseFloat(newNumber)).toNumber();
         }
         break;
     }
@@ -324,30 +339,30 @@ if (operators.length > 1 && Object.values(operatorsList).includes(val[val.length
     switch(operators[opCounter]){
       case plus:
         if (finalNumbers[numCounter].includes(percentage)) {
-          result += result * (parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100);
+          result = Big(result).plus(result * (parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100)).toNumber();
         } else {
-          result += parseFloat(finalNumbers[numCounter]);
+          result = Big(result).plus(parseFloat(finalNumbers[numCounter])).toNumber();
         }
         break;
       case minus:
         if (finalNumbers[numCounter].includes(percentage)) {
-          result -= result * (parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100);
+          result = Big(result).minus(result * (parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100)).toNumber();
         } else {
-          result -= parseFloat(finalNumbers[numCounter]);
+          result = Big(result).minus(parseFloat(finalNumbers[numCounter])).toNumber();
         }
         break;
       case multiplication:
         if (finalNumbers[numCounter].includes(percentage)) {
-          result *= parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100;
+          result = Big(result).times(parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100).toNumber();
         } else {
-          result *= parseFloat(finalNumbers[numCounter]);
+          result = Big(result).times(parseFloat(finalNumbers[numCounter])).toNumber();
         }
         break;
       case division:
         if (finalNumbers[numCounter].includes(percentage)) {
-          result /= parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100;
+          result = Big(result).div(parseFloat(finalNumbers[numCounter].slice(0,-1)) / 100).toNumber();
         } else {
-          result /= parseFloat(finalNumbers[numCounter]);
+          result = Big(result).div(parseFloat(finalNumbers[numCounter])).toNumber();
         }
         break;
     }
@@ -524,6 +539,16 @@ body {
 }
 .main-operation-letter-light {
   color: #2e323b;
+}
+.pointerNotVisible {
+  display:none;
+}
+.pointer {
+  width: 8px;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 3.5rem;
+  color: rgb(119, 119, 216);
 }
 .result-operation-container {
   height: 40%;
