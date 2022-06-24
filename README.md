@@ -2,7 +2,7 @@
 
 ## Project setup
 ```
-npm install
+remote change
 ```
 
 ### Compiles and hot-reloads for development
