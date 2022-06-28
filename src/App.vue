@@ -8,11 +8,11 @@
   <div class="calculation" :class="{'calculation-dark-mode': darkMode, 'calculation-light-mode': !darkMode}">
     <div class="main-operation-container">
       <div class="pointer" :class="{'pointer-visible':pointer,'pointer-not-visible':!pointer}">{{ pointerValue }}</div>
-      <div class="main-operation" :class="{'main-operation-letter-dark': darkMode, 'main-operation-letter-light': !darkMode}">{{ screenOperation }}</div>
+        <div v-if="screenOperation.length > 0" class="main-operation" :class="{'main-operation-letter-dark': darkMode, 'main-operation-letter-light': !darkMode,'short-sentence': sentenceSize<10, 'medium-sentence': sentenceSize>9 && sentenceSize<13, 'large-sentence': sentenceSize>12}">{{ screenOperation }}</div>
     </div>
-    <div class="result-operation-container">
-      <div class="result-operation" :class="{'result-operation-letter-dark': darkMode, 'result-operation-letter-light': !darkMode}"> {{ screenResult }}</div>
-    </div>
+      <div class="result-operation-container">
+          <div class="result-operation" :class="{'result-operation-letter-dark': darkMode, 'result-operation-letter-light': !darkMode}">{{ screenResult }}</div> 
+      </div>
   </div>
   <div :class="{'general-buttons-dark': darkMode, 'general-buttons-light': !darkMode}">
     <div class="buttons-container" :class="{'buttons-background-dark': darkMode, 'buttons-background-light': !darkMode}">
@@ -88,6 +88,7 @@ const operatorListMultDiv = {
 let darkMode = ref(true);
 let lightMode = ref(false);
 const Big = require('big.js')
+let sentenceSize = ref(0);
 
 let internalOperation = ref([]);
 let screenOperation = ref("");
@@ -368,6 +369,7 @@ if (operators.length > 1 && Object.values(operatorsList).includes(val[val.length
     }
   }
 }
+sentenceSize.value = screenOperation.value.length
 });
 
 const darkModeOff = () => {
@@ -427,7 +429,6 @@ const resultEqual = () => {
     //pass
   } else {
     internalOperation.value.length = 0;
-    console.log(typeof(screenResult.value))
     for(let i = 0; i < screenResult.value.toString().length; i++) {
       internalOperation.value.push(screenResult.value.toString()[i])
     }
@@ -524,7 +525,15 @@ body {
 .main-operation {
   display: flex;
   justify-content: flex-end;
+}
+.short-sentence {
+  font-size: 4rem;  
+}
+.medium-sentence {
   font-size: 3rem;
+}
+.large-sentence {
+  font-size: 2.1rem;
 }
 .main-operation-letter-dark {
   color: #ffffff;
