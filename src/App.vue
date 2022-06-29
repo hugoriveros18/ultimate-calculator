@@ -8,7 +8,7 @@
   <div class="calculation" :class="{'calculation-dark-mode': darkMode, 'calculation-light-mode': !darkMode}">
     <div class="main-operation-container">
       <div class="pointer" :class="{'pointer-visible':pointer,'pointer-not-visible':!pointer}">{{ pointerValue }}</div>
-        <div v-if="screenOperation.length > 0" class="main-operation" :class="{'main-operation-letter-dark': darkMode, 'main-operation-letter-light': !darkMode,'short-sentence': sentenceSize<9, 'medium-sentence': sentenceSize>8 && sentenceSize<12, 'large-sentence': sentenceSize>11}">{{ screenOperation }}</div>
+        <div v-if="screenOperation.length > 0" class="main-operation" :class="{'main-operation-letter-dark': darkMode, 'main-operation-letter-light': !darkMode,'short-sentence': sentenceSize<=8, 'medium-sentence': sentenceSize>=9 && sentenceSize<=11, 'large-sentence': sentenceSize>=12 && sentenceSize <= 15, 'extralarge-sentence': sentenceSize >= 16}">{{ screenOperation }}</div>
     </div>
       <div class="result-operation-container">
           <div class="result-operation" :class="{'result-operation-letter-dark': darkMode, 'result-operation-letter-light': !darkMode}">{{ screenResult }}</div> 
@@ -534,6 +534,9 @@ body {
 }
 .large-sentence {
   font-size: 2.1rem;
+}
+.extralarge-sentence {
+  font-size: 1.8rem;
 }
 .main-operation-letter-dark {
   color: #ffffff;
