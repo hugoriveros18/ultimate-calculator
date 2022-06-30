@@ -16,9 +16,9 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 65px;
-    width: 65px;
-    font-size: 25px;
+    width: 18vw;
+    height: 9vh;
+    font-size: 4vh;
     border-radius: 12px;
     border: none;
 }
@@ -35,5 +35,16 @@ button {
 }
 .color-light:active {
     background-color: #e7e7e7;
+}
+
+@media screen and (min-width: 768px) {
+    button {
+        font-size: 5.5vh;
+    }
+}
+@media screen and (min-width: 1024px) {
+    button {
+        width: 10vw;
+    }
 }
 </style>

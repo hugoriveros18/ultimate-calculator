@@ -14,7 +14,7 @@
           <div class="result-operation" :class="{'result-operation-letter-dark': darkMode, 'result-operation-letter-light': !darkMode}">{{ screenResult }}</div> 
       </div>
   </div>
-  <div :class="{'general-buttons-dark': darkMode, 'general-buttons-light': !darkMode}">
+  <div class="general-buttons" :class="{'general-buttons-dark': darkMode, 'general-buttons-light': !darkMode}">
     <div class="buttons-container" :class="{'buttons-background-dark': darkMode, 'buttons-background-light': !darkMode}">
       <GreenButton v-text="ayc" @click="removeItems" :colorMode="darkMode"/>
       <GreenButton v-text="plusMinus" @click="plusMinusFunction" :colorMode="darkMode"/>
@@ -403,11 +403,17 @@ const addValue = (e) => {
         internalOperation.value.push(e.target.value);
       }
     }
-    } else {
+  } else {
     if (e.target.value == percentage) {
       if (internalOperation.value.length > 0 && internalOperation.value[internalOperation.value.length-1] !== percentage && !Object.values(operatorsList).includes(internalOperation.value[internalOperation.value.length-1])) {
         internalOperation.value.push(e.target.value);  
       }
+    } else if (e.target.value == point) {
+        if(internalOperation.value.length == 0 || Object.values(operatorsList).includes(internalOperation.value[internalOperation.value.length-1])) {
+          internalOperation.value.push("0.");
+        } else {
+          internalOperation.value.push(e.target.value);
+        }
     } else {
       internalOperation.value.push(e.target.value);
     }
@@ -464,6 +470,7 @@ body {
 }
 .header {
   height: 15vh;
+  max-width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -476,6 +483,7 @@ body {
 }
 .modes-container {
   display: flex;
+  justify-content: center;
   width: auto;
   height: auto;
 }
@@ -581,6 +589,10 @@ body {
 .general-buttons-light {
   background-color: #ffffff;
 }
+.general-buttons {
+  display: flex;
+  justify-content: center;
+}
 .buttons-container {
   box-sizing: border-box;
   padding: 25px 15px 40px 15px;
@@ -601,5 +613,19 @@ body {
 }
 .main-button:active {
   background-color: #474a52;
+}
+
+@media screen and (min-width: 768px) {
+  .medium-sentence, .large-sentence, .extralarge-sentence {
+    font-size: 4rem;
+  }
+  .result-operation {
+    font-size: 2.5rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .modes-container, .main-operation-container, .result-operation-container, .buttons-container {
+    width: 50vw;
+  }
 }
 </style>
