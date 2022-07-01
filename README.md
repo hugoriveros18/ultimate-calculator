@@ -6,7 +6,9 @@ The project consists of a basic calculator that performs the primary mathematica
 
 **Direct access: **https://hugoriveros18.github.io/ultimate-calculator/
 
-##Preview
+## Preview
+As mentioned before, the web application is responsively designed to function correctly on mobiles, tablets, laptops or desktop computers.
+
 ***Mobile***
 
 <img src="./preview_images/mobile-version.png" width="300" height="300" />
