@@ -8,7 +8,7 @@ The project consists of a basic calculator that performs the primary mathematica
 
 ##Preview
 ***Mobile***
-<div display="flex">
+<div display="flex" gap="10px" justify-content="center">
     <img src="./preview_images/ultimate-calculator-mobile-dark-mode.png" width="375" height="800" />
     <img src="./preview_images/ultimate-calculator-mobile-light-mode.png" width="375" height="800" />
 </div>
