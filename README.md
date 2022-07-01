@@ -8,12 +8,17 @@ The project consists of a basic calculator that performs the primary mathematica
 
 ##Preview
 ***Mobile***
-<img src="./preview_images/ultimate-calculator-mobile-dark-mode.png" width="360" height="800" />
-![Mobile Light Mode](./preview_images/ultimate-calculator-mobile-light-mode.png)
+
+<img src="./preview_images/ultimate-calculator-mobile-dark-mode.png" width="375" height="800" />
+<img src="./preview_images/ultimate-calculator-mobile-light-mode.png" width="375" height="800" />
+
 ***Tablet***
+
 ![Tablet Dark Mode](./preview_images/ultimate-calculator-tablet-dark-mode.png)
 ![Tablet Light Mode](preview_images/ultimate-calculator-tablet-light-mode.png)
+
 ***Laptop***
+
 ![Laptop Dark Mode](./preview_images/ultimate-calculator-desktop-dark-mode.png)
 ![Laptop Light Mode](./preview_images/ultimate-calculator-desktop-light-mode.png)
 
