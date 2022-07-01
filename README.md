@@ -1,4 +1,4 @@
-# Ultimate Calculator :tw-1f522: 
+# Ultimate Calculator 
 
 ## Description
 
@@ -8,20 +8,17 @@ The project consists of a basic calculator that performs the primary mathematica
 
 ##Preview
 ***Mobile***
-<div display="flex" gap="10px" justify-content="center">
-    <img src="./preview_images/ultimate-calculator-mobile-dark-mode.png" width="375" height="800" />
-    <img src="./preview_images/ultimate-calculator-mobile-light-mode.png" width="375" height="800" />
-</div>
+
+<img src="./preview_images/mobile-version.png" width="300" height="300" />
 
 ***Tablet***
 
-![Tablet Dark Mode](./preview_images/ultimate-calculator-tablet-dark-mode.png)
-![Tablet Light Mode](preview_images/ultimate-calculator-tablet-light-mode.png)
+<img src="./preview_images/tablet-version.png" width="300" height="300" />
+
 
 ***Laptop***
 
-![Laptop Dark Mode](./preview_images/ultimate-calculator-desktop-dark-mode.png)
-![Laptop Light Mode](./preview_images/ultimate-calculator-desktop-light-mode.png)
+<img src="./preview_images/desktop-version.png" width="300" height="300" />
 
 ## Project Status
 
