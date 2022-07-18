@@ -25,6 +25,9 @@ button {
     border: none;
     padding: 0;
 }
+button:hover {
+    cursor: pointer;
+}
 .color-dark {
     color: #e2e3e5;
 }

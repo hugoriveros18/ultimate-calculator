@@ -627,5 +627,13 @@ body {
   .modes-container, .main-operation-container, .result-operation-container, .buttons-container {
     width: 50vw;
   }
+  .calculation {
+    height: 20vh;
+    gap: 10px;
+  }
+  .general-buttons {
+    padding-bottom: 5vh; 
+  }
+
 }
 </style>

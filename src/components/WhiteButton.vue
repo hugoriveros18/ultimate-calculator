@@ -22,6 +22,9 @@ button {
     border-radius: 12px;
     border: none;
 }
+button:hover {
+    cursor: pointer;
+}
 .color-dark {
     color: #e3e5e9;
     background-color: #272b33;
