@@ -11,16 +11,16 @@ As mentioned before, the web application is responsively designed to function co
 
 ***Mobile***
 
-<img src="./preview_images/mobile-version.png" width="300" height="300" />
+<img src="./preview_images/mobile-version.png" width="300"/>
 
 ***Tablet***
 
-<img src="./preview_images/tablet-version.png" width="300" height="300" />
+<img src="./preview_images/tablet-version.png" width="300"/>
 
 
 ***Desktop***
 
-<img src="./preview_images/desktop-version.png" width="300" height="300" />
+<img src="./preview_images/desktop-version.png" width="300"/>
 
 ## Project Status
 

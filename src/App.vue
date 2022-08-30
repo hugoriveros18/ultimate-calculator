@@ -523,6 +523,7 @@ body {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
+  gap: 1px;
   overflow-x: auto;
   white-space: nowrap;
   overscroll-behavior-inline: contain;
