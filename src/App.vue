@@ -8,7 +8,7 @@
   <div class="calculation" :class="{'calculation-dark-mode': darkMode, 'calculation-light-mode': !darkMode}">
     <div class="main-operation-container">
       <div class="pointer" :class="{'pointer-visible':pointer,'pointer-not-visible':!pointer}">{{ pointerValue }}</div>
-        <div v-if="screenOperation.length > 0" class="main-operation" :class="{'main-operation-letter-dark': darkMode, 'main-operation-letter-light': !darkMode,'short-sentence': sentenceSize<=8, 'medium-sentence': sentenceSize>=9 && sentenceSize<=11, 'large-sentence': sentenceSize>=12 && sentenceSize <= 15, 'extralarge-sentence': sentenceSize >= 16}">{{ screenOperation }}</div>
+        <div class="main-operation" :class="{'main-operation-letter-dark': darkMode, 'main-operation-letter-light': !darkMode,'short-sentence': sentenceSize<=8, 'medium-sentence': sentenceSize>=9 && sentenceSize<=11, 'large-sentence': sentenceSize>=12 && sentenceSize <= 15, 'extralarge-sentence': sentenceSize >= 16}">{{ screenOperation }}</div>
     </div>
       <div class="result-operation-container">
           <div class="result-operation" :class="{'result-operation-letter-dark': darkMode, 'result-operation-letter-light': !darkMode}">{{ screenResult }}</div> 
@@ -532,11 +532,14 @@ body {
   display: none;
 }
 .main-operation {
+  width: 95%;
+  height: 100%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 .short-sentence {
-  font-size: 4rem;  
+  font-size: 3.5rem;  
 }
 .medium-sentence {
   font-size: 3rem;
@@ -555,8 +558,9 @@ body {
 }
 .pointer {
   display: flex;
-  justify-content: flex-end;
-  width: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  width: 5%;
   font-size: 3.5rem;
   color: rgb(119, 119, 216);
 }
