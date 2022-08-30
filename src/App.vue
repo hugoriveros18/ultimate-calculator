@@ -532,7 +532,7 @@ body {
   display: none;
 }
 .main-operation {
-  width: 95%;
+  width: 98%;
   height: 100%;
   display: flex;
   justify-content: flex-end;
@@ -560,7 +560,7 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 5%;
+  width: 2%;
   font-size: 3.5rem;
   color: rgb(119, 119, 216);
 }
