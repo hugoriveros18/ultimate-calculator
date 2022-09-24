@@ -646,6 +646,8 @@ body {
   .general-buttons {
     padding-bottom: 5vh; 
   }
-
+  .buttons-container {
+    border-radius: 30px;
+}
 }
 </style>
