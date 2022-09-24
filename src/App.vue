@@ -472,9 +472,12 @@ body {
   height: 100vh;
   height: -webkit-fill-available;
 }
+#app{
+  width: 100%;
+  height: 100%;
+}
 .header {
-  height: 15vh;
-  max-width: 100vw;
+  height: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -509,7 +512,7 @@ body {
 }
 .calculation {
   width: 100%;
-  height: 25vh;
+  height: 25%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -599,6 +602,7 @@ body {
   background-color: #ffffff;
 }
 .general-buttons {
+  height: 60%;
   display: flex;
   justify-content: center;
 }
@@ -606,7 +610,6 @@ body {
   box-sizing: border-box;
   padding: 25px 15px 40px 15px;
   width: 100%;
-  height: 60vh;
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(4, 1fr);
